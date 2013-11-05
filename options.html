@@ -1,13 +1,18 @@
 <html>
-<head><title>Dimmer Options</title></head>
+<head>
+  <title>Dimmer Options</title>
+  <style>
+    div {margin: 0.3em;}
+  </style>
+</head>
 
 <body>
-
-Darkness:
-<input type="text" name="opacity" id="opacity" value="2"></input>
-<div id="saveMessage"></div>
-<button id="save">Save</button>
-<div>Enabled: <input type="checkbox" id="enabledBox"></input></div>
+  <div>Darkness:
+    <input type="range" name="opacity" id="opacity" value="2" max="10"></input>
+  </div>
+  <div>Enabled: 
+    <input type="checkbox" id="status"></input>
+  </div>
 </body>
 
 <script src="options.js"></script>

@@ -20,7 +20,8 @@
       if (message.status === 'enabled') {
         insertOverlay();
       } else {
-        document.body.removeChild(window.document.getElementById('dimmerChromeExtension'));
+        document.body.removeChild(document.
+                 getElementById('dimmerChromeExtension'));
       }
     }
     if (message.subject === 'opacity') {
