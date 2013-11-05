@@ -1,0 +1,34 @@
+chrome.storage.local.get(null, function(items){
+  chrome.storage.local.set({"opacity": items.opacity || 3});
+  chrome.storage.local.set({"status": items.status || 'enabled'});
+});
+
+function save_options() {
+  var opacity =  document.getElementById("opacity").value;
+  var saveMessage = document.getElementById('saveMessage');
+  var status = document.getElementById('enabledBox').checked ? "enabled" : "disabled"
+  saveMessage.innerHTML = "Options Saved.";
+  setTimeout(function() {
+    saveMessage.innerHTML = "";
+  }, 750);
+
+  chrome.storage.local.set({"opacity": opacity});
+  chrome.storage.local.set({"status": status});
+
+  chrome.tabs.query({},function(tabs) {
+    tabs.forEach(function(val) {
+      chrome.tabs.sendMessage(val.id, {subject: "opacity", opacity: opacity});
+      chrome.tabs.sendMessage(val.id, {subject: "status", status: status});
+    });
+  }); 
+}
+
+function restore_options() {
+  chrome.storage.local.get(null, function(items) {
+    document.getElementById("opacity").value = items.opacity;
+    document.getElementById("enabledBox").checked = items.status === 'enabled' ? true : false;
+  });
+}
+
+document.addEventListener('DOMContentLoaded', restore_options);
+document.querySelector('#save').addEventListener('click', save_options);
