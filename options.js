@@ -8,9 +8,9 @@ document.querySelector('#save').addEventListener('click', save_options);
 
 function restore_options() {
   chrome.storage.local.get(null, function(items) {
-    document.getElementById("opacity").value = items.opacity;
+    document.getElementById("opacity").value = items.opacity || 3;
     document.getElementById("enabledBox").checked = 
-             items.status === 'enabled' ? true : false;
+             (!items.status || items.status === 'enabled') ? true : false;
   });
 }
 
